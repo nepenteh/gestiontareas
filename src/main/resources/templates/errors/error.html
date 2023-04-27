@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+<div class="container">
+	<div class="row my-5">
+		<div class="col-12 text-center pt-4 pb-5 error-info">
+			<p class="py-2"><img th:src="@{/images/app_error_logo.png}" width="200px" class="img-fluid" th:alt="${errorMessage1}"></p>
+			<h2 th:text="${'Error '+errorCode}"></h2>
+			<h5 th:text="${errorMessage1}"></h5>
+			<div class="mt-4"><a href="/" class="fst-italic fw-light">Back to Gestión de Tareas</a></div>
+		</div>
+	</div>
+</div>
+
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
+</body>
+</html>
+
+
+<!-- Duende Code Generator Jose Manuel Rosado ejerciciosmesa.com 2023 -->
+

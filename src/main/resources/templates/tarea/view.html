@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="layout/layout :: head-basic"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: jquery-ui-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+	<nav th:replace="layout/layout :: menu"></nav>
+	<div th:replace="layout/layout :: screen-title"></div>
+	<div th:replace="layout/layout :: messages-zone"></div>
+
+	<div class="container-fluid ms-1 me-1 py-1">
+
+		<div class="row justify-content-center mt-3 ms-1 me-1">
+			<div class="col-12 formclass create-form shadow pt-3">
+			
+				<div class="row g-3 align-items-center mb-3">
+			
+				
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Titulo: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.titulo}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Asignada A: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.asignada}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Fecha Inicio: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.fechaInicio}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Fecha Fin: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.fechaFin}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Descripcion: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<div 
+		 class="textareaview areacompressed" 
+				
+		th:utext="${#strings.replace(tarea.descripcion,'&#10;','&lt;br&gt;')}"></div>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Materiales: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<div 
+		 class="textareaview areacompressed" 
+				
+		th:utext="${#strings.replace(tarea.materiales,'&#10;','&lt;br&gt;')}"></div>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Horas: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.horas}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Coste: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.coste}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Foto 1: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<a th:if="${tarea.foto1 != null}" th:href="@{'/tarea/viewimg/'+${tarea.id}+'/foto1'}" title="View foto1">
+		<img th:if="${tarea.foto1 != null}" 
+			th:src="@{'/upload/' + ${tarea.foto1}}" width="100px" 
+			class="border border-white shadow">
+		</a>
+		<img th:if="${tarea.foto1 == null}" th:src="@{'/images/app_no_image_logo.png'}" width="100px"></img>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Foto 2: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<a th:if="${tarea.foto2 != null}" th:href="@{'/tarea/viewimg/'+${tarea.id}+'/foto2'}" title="View foto2">
+		<img th:if="${tarea.foto2 != null}" 
+			th:src="@{'/upload/' + ${tarea.foto2}}" width="100px" 
+			class="border border-white shadow">
+		</a>
+		<img th:if="${tarea.foto2 == null}" th:src="@{'/images/app_no_image_logo.png'}" width="100px"></img>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Porcentaje: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<span th:text="${tarea.porcentajeCompletada}"></span>
+	</div>
+
+
+	<div class="col-md-2">
+		<span class="fw-bold mb-0">Completada: </span>
+	</div>
+	<div class="col-md-4 mt-1 mt-md-3">
+		<div th:if="${tarea.completada !=null}">
+			<div class="booleandiv" th:if="${tarea.completada==true}">
+				<input type="checkbox" class="form-check-input" checked onclick="return false;">
+			</div>
+			<div class="booleandiv" th:if="${tarea.completada==false}">
+				<input type="checkbox"class="form-check-input"  onclick="return false;">
+			</div>
+		</div>
+		<div th:if="${tarea.completada ==null}" th:text="---"></div>
+		
+	</div>
+
+
+				
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="layout/layout :: authorship"></div>
+
+	<div th:insert="layout/layout :: jquery-js"></div>
+	<div th:insert="layout/layout :: jquery-ui-js"></div>
+	<div th:insert="layout/layout :: bootstrap-js"></div>
+
+
+
+
+</body>
+</html>
+
+
+
+<!-- Duende Code Generator Jose Manuel Rosado ejerciciosmesa.com 2023 -->
+

@@ -1,0 +1,304 @@
+:root {
+	--bgcolor-menu: #535b0e;
+	--color-menu: white;
+	--color-menu-hover: rgb(211, 211, 211);
+	--color-menu-active: #c2c69f;
+	--bgcolor-screen-titles: #838918;
+	--bgcolor-standard-button: #838918;
+	--color-standard-button: white;
+	--bgcolor-standard-button-hover: #afaf56;
+	--color-standard-button-hover: white;
+	--color-light-link: white;
+	--color-light-link-hover: #e5e5db;
+	--background-color-form: #e5e5db;
+	--shadow-form: rgba(229, 212, 23, 0.075);
+	--color-subtle: rgb(128, 128, 128);
+}
+ 
+.menu-bar {
+	background-color: var(--bgcolor-menu);
+	color:var(--color-menu)!important;
+}
+
+.menu-bar a {
+	color: var(--color-menu)!important;
+}
+
+.menu-bar a:hover {
+	color: var(--color-menu-hover)!important;
+}
+
+.menu-bar a.active {
+	color: var(--color-menu-active)!important;
+}
+
+.menu-bar .navbar-toggler .navbar-toggler-icon{
+	fill: var(--color-menu)!important;
+}
+
+.menu-logo {
+	width: 60px;
+	height: 55px;
+}
+
+.navbar-toggler {
+	width: 40px;
+	height: 40px;
+	border-color:var(--color-menu)!important;
+	padding: 3px 8px!important;
+}
+
+.navbar-toggler:hover .line, .navbar-toggler:hover {
+	border-color: var(--color-menu-hover);
+}
+
+.line {
+	border-bottom: solid 3px var(--color-menu);
+	height:25%;
+}
+
+.no-line {
+	border-bottom: none;
+	height:20%;
+}
+
+.screen-title {
+	background-color: var(--bgcolor-screen-titles);
+}
+
+.screen-title h1 {
+	font-size: 20px;
+	color:var(--color-standard-button);
+	margin-top:3px;
+}
+
+.screen-title a {
+	color: var(--color-standard-button);
+	text-decoration: none;
+}
+
+.screen-title a:hover {
+	color: var(--color-light-link-hover);
+}
+
+
+.standard-button {
+	background-color: var(--bgcolor-standard-button);
+	color: var(--color-standard-button);
+}
+
+.standard-button:hover {
+	background-color: var(--bgcolor-standard-button-hover);
+	color: var(--color-standard-button-hover);
+}
+
+.light-link {
+	color: var(--color-light-link);
+	text-decoration: none;
+}
+
+a.light-link:hover {
+	color: var(--color-light-link-hover);
+}
+
+.pagination li a {
+	color: var(--bgcolor-standard-button);
+}
+
+.pagination li.active a {
+	background-color: var(--bgcolor-standard-button)!important;
+	border-color: var(--bgcolor-standard-button)!important;
+	color: var(--color-standard-button);
+}
+
+.pagination li.disabled a {
+	color: lightgray!important;
+}
+
+.pagination li a:hover {
+	background-color: var(--bgcolor-standard-button-hover)!important;
+	border-color: var(--bgcolor-standard-button-hover)!important;
+	color: var(--color-standard-button-hover);
+}
+
+svg {
+	fill: lightgray!important;
+}
+
+a .svg-option {
+	fill: var(--bgcolor-standard-button)!important;
+	margin-left:3px;
+	margin-right:3px;
+}
+
+a .svg-option:hover {
+	fill: var(--bgcolor-standard-button-hover)!important;
+}
+
+.formclass {
+	background-color: var(--background-color-form);
+	border: solid 1px var(--bgcolor-standard-button-hover);
+}
+
+
+.form-control:focus, .standard-button:focus, .page-item a:focus {
+    border-color: var(--bgcolor-standard-button-hover)!important;
+    box-shadow: 0 1px 1px var(--shadow-form) inset, 0 0 8px var(--bgcolor-standard-button-hover);
+    outline: 0 none;
+}
+
+.page-item a:focus {
+	color: var(--bgcolor-standard-button)!important;
+}
+
+.page-item.active a:focus {
+	color: var(--color-standard-button)!important;
+}
+
+input::file-selector-button {
+	background-color: var(--bgcolor-standard-button)!important;
+	color: var(--color-standard-button)!important;
+}
+
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+	background-color: var(--bgcolor-standard-button-hover)!important;
+	color: var(--color-standard-button-hover)!important;
+}
+
+.authorship {
+	border-top: solid 1px var(--color-subtle);
+}
+
+.authorship a, .authorship span {
+	color: var(--color-subtle);
+	text-decoration: none;
+}
+
+.authorship a:hover {
+	color: var(--bgcolor-standard-button);
+}
+
+
+.modal-header {
+	background-color: var(--bgcolor-standard-button);
+	color: var(--color-standard-button);
+}
+
+.modal-header .btn-close {
+	background-color: var(--color-standard-button)!important;
+}
+
+.error-info {
+		background-color: var(--bgcolor-standard-button);
+		color: var(--color-standard-button);
+}
+
+.error-info a {
+	color: var(--color-menu)!important;
+	text-decoration: none;
+}
+
+.error-info a:hover {
+	color: var(--color-menu-hover)!important;
+}
+
+.textareaview {
+	border: var(--bgcolor-standard-button-hover) solid 1px; 
+	overflow: auto; 
+	resize: both; 
+	width: 100%;
+	padding: 8px;
+}
+
+.areanormal {
+	height: 250px;
+}
+
+.rowtextarea {
+	margin:8px;
+	max-width: 500px;
+	overflow: scroll; 
+	resize: both; 
+	height: 80px!important;
+	border: 1px solid var(--color-subtle);
+}
+
+.celltextarea {
+	max-width: 500px;
+}
+
+.booleandiv {
+	margin: 8px;
+}
+
+
+
+/* compressed screen */
+
+.main-container {
+	padding: 2px!important;
+}
+
+.table-list {
+	font-size: 0.9rem;
+}
+
+.table-list td, .table-list th {
+	padding: 2px 2px;
+}
+
+svg {
+	width: 17px!important;
+}
+
+.btn, button {
+	padding: 3px 10px!important;
+	font-size: 0.9rem!important;
+}
+
+.menu-bar {
+	padding: 2px 2px!important;
+}
+
+.menu-logo {
+	width: 35px;
+	height: auto;
+}
+
+.navbar-toggler {
+	width: 30px;
+	height: 30px;
+}
+
+.page-item a {
+	font-size:0.8rem!important;
+	padding: 1px 6px!important;
+}
+
+.pagination {
+	margin-right: 10px;
+}
+
+.screen-title {
+	padding: 1px 2px!important;
+}
+.screen-title h1 {
+	
+	font-size: 1.1rem!important;
+}
+
+.areacompressed {
+	height: 100px;
+}
+
+.booleandiv {
+	margin: 2px;
+}
+
+.rowtextarea {
+	margin:2px;
+}
+
+
+

@@ -1,0 +1,33 @@
+.divider:after, .divider:before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #ddd;
+}
+
+.h-custom {
+	height: calc(100% - 56px);
+}
+
+.main-logo {
+	width: 400px;
+	height: 350px;
+}
+
+
+
+
+/* compressed screen */
+
+.menu-bar {
+	padding:8px 10px!important;
+}
+
+.login-button {
+	font-size:1.2rem!important;
+	padding: 8px 20px!important;
+}
+
+
+
+

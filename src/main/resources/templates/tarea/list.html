@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<th:block th:replace="layout/layout :: head-basic"></th:block>
+<th:block th:replace="layout/layout :: bootstrap-css"></th:block>
+<th:block th:replace="layout/layout :: general-css"></th:block>
+</head>
+<body>
+<nav th:replace="layout/layout :: menu"></nav>
+<div th:replace="layout/layout :: screen-title"></div>
+<div th:replace="layout/layout :: messages-zone"></div>
+
+<div th:replace="layout/layout :: confirm"></div>
+
+<div class="container-fluid ms-1 me-1 py-1 main-container">
+
+	<div class="row mt-3 general-options">
+		<div class="col-2">
+			<a class="btn standard-button" th:href="@{'/tarea/formcr/'+${actualpage}}" th:text="${applicationData.getScreenName(optionCode,'CREATE')}"></a>
+		</div>
+		<div class="col-10">
+		
+		<th:block th:if="${numtarea>0}">
+		  <nav th:if="${numtarea>0}" th:replace="layout/layout :: paginator"></nav>
+		</th:block> 
+		</div>
+	</div>
+
+<h5 class="text-center my-5 mx-5" th:if="${numtarea==0}" th:text="${applicationData.getEmptyMessage(optionCode)}"></h5>
+
+<table th:if="${numtarea>0}" class="table table-striped table-list">
+<thead>
+	<tr>
+		<th scope="col">Titulo</th>
+<th scope="col">Asignada A</th>
+<th scope="col">Fecha Inicio</th>
+<th scope="col">Fecha Fin</th>
+<th scope="col">Horas</th>
+<th scope="col">Coste</th>
+<th scope="col">Porcentaje</th>
+<th scope="col">Completada</th>
+
+		<th scope="col">Options</th>
+	</tr>
+</thead>
+<tbody>
+<tr th:each="entity: ${listtarea}">
+		
+<td th:if="${entity.titulo !=null}"
+					th:text="${entity.titulo}">
+				<td th:if="${entity.titulo ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.asignada !=null}"
+					th:text="${entity.asignada}">
+				<td th:if="${entity.asignada ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.fechaInicio !=null}"
+					th:text="${entity.fechaInicio}">
+				<td th:if="${entity.fechaInicio ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.fechaFin !=null}"
+					th:text="${entity.fechaFin}">
+				<td th:if="${entity.fechaFin ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.horas !=null}"
+					th:text="${entity.horas}">
+				<td th:if="${entity.horas ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.coste !=null}"
+					th:text="${entity.coste}">
+				<td th:if="${entity.coste ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.porcentajeCompletada !=null}"
+					th:text="${entity.porcentajeCompletada}">
+				<td th:if="${entity.porcentajeCompletada ==null}" th:text="---"></td>
+
+
+<td th:if="${entity.completada !=null}">
+		<div class="booleandiv" th:if="${entity.completada==true}">
+			<input type="checkbox" class="form-check-input" checked onclick="return false;">
+		</div>
+		<div class="booleandiv" th:if="${entity.completada==false}">
+			<input type="checkbox" class="form-check-input" onclick="return false;">
+		</div>	
+<td th:if="${entity.completada ==null}" th:text="---">
+		
+</td>
+
+
+
+
+	<td>
+	    <a th:href="@{'/tarea/view/'+${entity.id}+'/'+${actualpage}}" title="View"><svg th:replace="layout/icons_svg :: svg-view"></svg></a>
+		<a th:href="@{'/tarea/formup/'+${entity.id}+'/'+${actualpage}}" title="Update"><svg th:replace="layout/icons_svg :: svg-update"></svg></a>
+		
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" title="Delete" th:attr="onclick=|showConfirmation('/tarea/delete/'+'${entity.id}'+'/'+'${actualpage}','Delete element','<strong>'+'${entity.id}'+'</strong><br>Are you sure you want to delete this element?','Delete')|">
+		<svg th:replace="layout/icons_svg :: svg-delete"></svg></a>
+		<span sec:authorize="!hasRole('ROLE_ADMIN')"><svg th:replace="layout/icons_svg :: svg-delete"></svg></span>
+		
+	</td>
+	</tr>
+</tbody>
+</table>
+
+<th:block th:if="${numtarea>0}">
+	<nav th:replace="layout/layout :: paginator"></nav>
+</th:block>
+
+</div>
+
+<div th:replace="layout/layout :: authorship"></div>
+
+<div th:insert="layout/layout :: jquery-js"></div>
+<div th:insert="layout/layout :: bootstrap-js"></div>
+
+<script
+		th:replace="layout/layout :: dialog_confirmation"></script>
+	
+</body>
+</html>
+
+
+<!-- Duende Code Generator Jose Manuel Rosado ejerciciosmesa.com 2023 -->
+

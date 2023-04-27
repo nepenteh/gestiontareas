@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<th:block th:fragment="head-basic">
+	<meta charset="UTF-8">
+	<title th:text="${applicationData.getScreenName(optionCode,screen)}"></title>
+</th:block>
+
+<th:block th:fragment="head-basic-login">
+	<meta charset="UTF-8">
+	<title th:text="${applicationData.getName()}"></title>
+</th:block>
+
+<th:block th:fragment="bootstrap-css">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</th:block>
+
+<th:block th:fragment="jquery-ui-css">
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+</th:block>
+
+<th:block th:fragment="general-css">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</th:block>
+
+</head>
+
+<body>
+
+<nav th:fragment="menu" class="navbar navbar-expand-lg menu-bar">
+  <div class="container-fluid">
+  	<span class="navbar-brand" th:text="${applicationData.name}"></span>
+    <img th:src="@{/images/app_menu_logo.png}" class="menu-logo">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line no-line"></div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      	<li th:each="generalOption : ${applicationData.sortedGeneralOptions}">
+      		<a class="nav-link" th:classappend="${#strings.equals(generalOption.key,optionCode) ? 'active' : ''}" th:href="@{${generalOption.link}}"
+      			th:text="${generalOption.name}"></a>
+      	</li>
+      </ul>
+      <div class="navbar-text ">
+        <span sec:authentication="name" class="d-inline-block me-2" ></span>
+        <form method="post" th:action="@{/logout}" class="d-inline-block">
+			<input type="submit" value="Log out" class="btn btn-secondary py-1 px-2">
+		</form>
+       </div>
+    </div>
+  </div>
+</nav>
+
+	<div th:fragment="screen-title" class="screen-title py-1 text-center position-relative">
+		<div th:if="${!applicationData.isMainScreen(optionCode,screen)}" class="position-absolute mt-1 ms-3 d-none d-md-block">
+		   <a th:if="${backOption!=null && backOption}" href="javascript:history.back(-1);" title="Back" class="fst-italic fw-light">Back</a>
+		   <a th:if="${backOption==null || (backOption!=null && !backOption)}" class="fst-italic fw-light" th:href="@{${applicationData.getMainScreenLink(optionCode)}+'/'+${actualpage}}" th:text="${''+' '+applicationData.getMainScreenName(optionCode)}"></a>
+		</div>
+		<h1 th:text="${applicationData.getScreenName(optionCode,screen)}"></h1>
+	</div>
+
+	<div th:fragment="messages-zone">
+		<div th:if="${error!=null}" th:text="${error}"
+			class="bg-danger py-2 text-center text-white"></div>
+		<div th:if="${info!=null}" th:text="${info}"
+			class="py-2 text-center text-info border-bottom border-info"></div>
+		<div th:if="${warning!=null}" th:text="${warning}"
+			class="bg-warning py-2 text-center text-white"></div>
+		<div th:if="${success!=null}" th:text="${success}"
+			class=" py-2 text-center text-success border-bottom border-success"></div>
+	</div>
+
+	
+	<nav aria-label="..." th:fragment="paginator">
+		<ul class="pagination pagination-sm justify-content-end">
+			<li class="page-item" th:classappend="${paginator.first ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}+'/0'}">|&lt;</a>
+			</li>
+			<li class="page-item" th:classappend="${not paginator.hasPrevious ? 'disabled' : ''}">
+			  <a class="page-link fw-bold" th:href="@{${paginator.url}+'/'+${paginator.actualPage-2}}">&lt;&lt;</a>
+			</li>
+			<th:block th:each="square: ${paginator.pageItems}">
+			<li class="page-item" th:classappend="${square.actual ? 'active' : ''}">
+				<a class="page-link" 
+					th:if="${square.actual}"
+					href="#"
+					th:text="${square.pageNumber}">
+				</a>
+				<a class="page-link" 
+					th:if="${not square.actual}"
+					th:href="@{${paginator.url}+'/'+${square.pageNumber-1}}"
+					th:text="${square.pageNumber}">
+				</a>
+			</li>
+			</th:block>
+			<li class="page-item" th:classappend="${not paginator.hasNext ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}+'/'+${paginator.actualPage}}">&gt;&gt;</a>
+			</li>
+			<li class="page-item" th:classappend="${paginator.last ? 'disabled' : ''}">
+				<a class="page-link fw-bold" th:href="@{${paginator.url}+'/'+${paginator.totalPages-1}}">&gt;|</a>
+			</li>
+		</ul>
+	</nav>
+
+
+<div th:fragment="confirm" class="modal fade" id="modalConfirm" tabindex="-1" aria-labelledby="modalConfirmTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalConfirmTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalConfirmBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Cancel</button>
+        <a href="#" type="button" class="btn standard-button" id="modalOk">Ok</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" th:fragment="dialog_confirmation">
+function showConfirmation(target,title,question,okButtonText) {
+	var myModal = new bootstrap.Modal(document.getElementById('modalConfirm'));
+	var titleElement = document.getElementById('modalConfirmTitle');
+	titleElement.innerHTML = title;
+	var text = document.getElementById('modalConfirmBody');
+	text.innerHTML = question; 
+	var OkButton = document.getElementById('modalOk');
+	OkButton.innerHTML = okButtonText;
+	OkButton.href=target;
+	myModal.show();
+}
+</script>
+
+<script type="text/javascript" th:fragment="clear_imagefield">
+function clearImageField(idImage,idImageFileText,idImageDiv) {
+	var image = document.getElementById(idImage);
+	var imageText = document.getElementById(idImageFileText);
+	var imageDiv = document.getElementById(idImageDiv);
+	
+	image.style.display = "none";
+	imageText.value = "";
+	imageDiv.style.display = "none";
+}
+</script>
+
+<div class="authorship py-2 mt-5 small text-center" th:fragment="authorship">
+	<span th:if="${applicationData.webUrl==''}" th:text="${applicationData.authorship}"></span>
+	<a th:if="${applicationData.webUrl!=''}" th:href="@{${applicationData.webUrl}}" th:text="${applicationData.authorship}" target="_blank"></a>
+</div>
+
+	<div th:fragment="jquery-js">
+		<script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+	</div>
+	<div th:fragment="jquery-ui-js">
+		<script th:src="@{/js/jquery-ui.min.js}"></script>
+	</div>
+	<div th:fragment="bootstrap-js">
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+	</div>
+</body>
+</html>
+
+
+<!-- Duende Code Generator Jose Manuel Rosado ejerciciosmesa.com 2023 -->
+
